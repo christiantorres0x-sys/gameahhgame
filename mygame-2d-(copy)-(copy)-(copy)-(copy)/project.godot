@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="mygame2d (Copy) (Copy) (Copy) (Copy)"
-run/main_scene="uid://d21qjuvciijxe"
+config/name="veil of ruin witih menu (Copy)"
+run/main_scene="uid://cebdvy2477q4u"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 

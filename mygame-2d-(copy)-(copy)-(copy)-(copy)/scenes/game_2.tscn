@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://clmmvnvrrmsha"]
+[gd_scene load_steps=23 format=3 uid="uid://clmmvnvrrmsha"]
 
 [ext_resource type="Texture2D" uid="uid://brr37yd5axtel" path="res://assets/Texture/TX Village Props.png" id="1_me4bl"]
 [ext_resource type="Texture2D" uid="uid://bt31qy4f1ig5i" path="res://assets/Sprites/world_tileset.png" id="1_tg8mu"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://brdgui2c3etqx" path="res://scenes/enemy_1.tscn" id="6_f674i"]
 [ext_resource type="PackedScene" uid="uid://bk15rsut7y2x0" path="res://scenes/killzone.tscn" id="6_wjphx"]
 [ext_resource type="PackedScene" uid="uid://bjk2q5cii15fn" path="res://scenes/lever.tscn" id="8_so0bb"]
+[ext_resource type="AudioStream" uid="uid://cpu5ql5kform0" path="res://assets/music/Veil Of Ruin - Pixel Kingdom Loop.mp3" id="10_kmooo"]
+[ext_resource type="AudioStream" uid="uid://cfno8oxnwymu2" path="res://assets/sounds/fastswing.wav" id="11_kmooo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_31blf"]
 texture = ExtResource("1_me4bl")
@@ -2928,9 +2930,6 @@ target_scene_path = "res://scenes/game.tscn"
 position = Vector2(504, -99)
 target_scene_path = "res://scenes/game_3.tscn"
 
-[node name="player" parent="." instance=ExtResource("3_1oiof")]
-position = Vector2(-373, 187)
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(83, 206)
 sprite_frames = SubResource("SpriteFrames_h0x8i")
@@ -2974,3 +2973,15 @@ position = Vector2(-104, -56)
 
 [node name="lever" parent="." instance=ExtResource("8_so0bb")]
 position = Vector2(328, -19)
+
+[node name="player" parent="." instance=ExtResource("3_1oiof")]
+position = Vector2(-385, 189)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="player"]
+stream = ExtResource("10_kmooo")
+autoplay = true
+
+[node name="SwingSound" type="AudioStreamPlayer2D" parent="player"]
+stream = ExtResource("11_kmooo")
+
+[connection signal="draw" from="player/SwingSound" to="player" method="_on_swing_sound_draw"]

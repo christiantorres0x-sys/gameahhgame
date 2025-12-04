@@ -5,6 +5,7 @@ const NORMAL_JUMP = -390.0
 const BOOSTED_JUMP = -500.0
 
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var swing_sound = $SwingSound  # <-- make sure the node is named SwingSound
 
 var boosted = false
 var is_attacking = false
@@ -49,10 +50,16 @@ func _physics_process(delta):
 	move_and_slide()
 
 # ========== ATTACK ==========
+
 func start_attack():
 	is_attacking = true
 	animated_sprite.play("attack")
 
+	# ---------- PLAY SWING SOUND ----------
+	if swing_sound:
+		swing_sound.play()
+
+	# ---------- CONNECT FINISH SIGNAL ----------
 	if not animated_sprite.is_connected("animation_finished", Callable(self, "_on_attack_finished")):
 		animated_sprite.connect("animation_finished", Callable(self, "_on_attack_finished"))
 
@@ -69,3 +76,7 @@ func apply_jump_boost():
 	boosted = true
 	await get_tree().create_timer(6).timeout
 	boosted = false
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.

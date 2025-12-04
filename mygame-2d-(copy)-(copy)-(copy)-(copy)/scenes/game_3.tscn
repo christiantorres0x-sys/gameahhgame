@@ -1,14 +1,17 @@
-[gd_scene load_steps=17 format=3 uid="uid://cycll126l7upf"]
+[gd_scene load_steps=20 format=3 uid="uid://cycll126l7upf"]
 
 [ext_resource type="Texture2D" uid="uid://bt31qy4f1ig5i" path="res://assets/Sprites/world_tileset.png" id="1_khyur"]
 [ext_resource type="Texture2D" uid="uid://brr37yd5axtel" path="res://assets/Texture/TX Village Props.png" id="2_r1ad8"]
 [ext_resource type="PackedScene" uid="uid://u60lgh6hmv3a" path="res://scenes/player.tscn" id="5_ugac3"]
 [ext_resource type="Texture2D" uid="uid://c6ggug7j5bt8u" path="res://assets/Texture/TX Tileset Ground.png" id="6_p30vf"]
 [ext_resource type="PackedScene" uid="uid://cycctv3hwfvrt" path="res://scenes/coin.tscn" id="7_2px5s"]
+[ext_resource type="AudioStream" uid="uid://da2vc0kahg2aj" path="res://assets/music/Checkpoint 2.mp3" id="8_gbms7"]
 [ext_resource type="PackedScene" uid="uid://bk15rsut7y2x0" path="res://scenes/killzone.tscn" id="9_pnpoq"]
+[ext_resource type="Texture2D" uid="uid://cy62d1poh8kj0" path="res://assets/Tent_Campfire.png" id="9_w46gi"]
 [ext_resource type="PackedScene" uid="uid://brdgui2c3etqx" path="res://scenes/enemy_1.tscn" id="10_ibm7l"]
+[ext_resource type="AudioStream" uid="uid://cfno8oxnwymu2" path="res://assets/sounds/fastswing.wav" id="10_r1ad8"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hqpx7"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gbms7"]
 texture = ExtResource("1_khyur")
 0:0/0 = 0
 1:0/0 = 0
@@ -138,7 +141,7 @@ texture = ExtResource("1_khyur")
 2:15/0 = 0
 3:15/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gbms7"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1uv66"]
 texture = ExtResource("2_r1ad8")
 26:0/0 = 0
 27:0/0 = 0
@@ -1450,8 +1453,8 @@ texture = ExtResource("2_r1ad8")
 56:61/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_8ipfs"]
-sources/1 = SubResource("TileSetAtlasSource_gbms7")
-sources/0 = SubResource("TileSetAtlasSource_hqpx7")
+sources/1 = SubResource("TileSetAtlasSource_1uv66")
+sources/0 = SubResource("TileSetAtlasSource_gbms7")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w46gi"]
 texture = ExtResource("1_khyur")
@@ -3705,8 +3708,19 @@ shape = SubResource("WorldBoundaryShape2D_gee14")
 [node name="enemy1" parent="killzone" instance=ExtResource("10_ibm7l")]
 position = Vector2(454, 41)
 
-[node name="player" parent="." instance=ExtResource("5_ugac3")]
-position = Vector2(-405, -133)
+[node name="TentCampfire" type="Sprite2D" parent="."]
+position = Vector2(54, 182)
+scale = Vector2(0.13749187, 0.14331056)
+texture = ExtResource("9_w46gi")
 
-[connection signal="body_entered" from="coin" to="player" method="_on_coin_body_entered"]
-[connection signal="body_entered" from="coin2" to="player" method="_on_coin_body_entered"]
+[node name="player" parent="." instance=ExtResource("5_ugac3")]
+position = Vector2(-397, -136)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="player"]
+stream = ExtResource("8_gbms7")
+autoplay = true
+
+[node name="SwingSound" type="AudioStreamPlayer2D" parent="player"]
+stream = ExtResource("10_r1ad8")
+
+[connection signal="draw" from="player/SwingSound" to="player" method="_on_swing_sound_draw"]

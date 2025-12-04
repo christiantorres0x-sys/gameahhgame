@@ -1,16 +1,20 @@
-[gd_scene load_steps=33 format=3 uid="uid://dvho52ruuwdd4"]
+[gd_scene load_steps=37 format=3 uid="uid://dvho52ruuwdd4"]
 
 [ext_resource type="PackedScene" uid="uid://u60lgh6hmv3a" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://bt31qy4f1ig5i" path="res://assets/Sprites/world_tileset.png" id="2_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://brr37yd5axtel" path="res://assets/Texture/TX Village Props.png" id="3_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://c6ggug7j5bt8u" path="res://assets/Texture/TX Tileset Ground.png" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://cycctv3hwfvrt" path="res://scenes/coin.tscn" id="5_iywne"]
+[ext_resource type="AudioStream" uid="uid://cpu5ql5kform0" path="res://assets/music/Veil Of Ruin - Pixel Kingdom Loop.mp3" id="6_ir15t"]
 [ext_resource type="Texture2D" uid="uid://nf444vh7ixse" path="res://Liquid Tiles/FlowingCartoonWater.png" id="6_kvpfn"]
 [ext_resource type="Texture2D" uid="uid://dwot664e00q6i" path="res://assets/Texture/TX FX Flame.png" id="6_p57ef"]
+[ext_resource type="AudioStream" uid="uid://cfno8oxnwymu2" path="res://assets/sounds/fastswing.wav" id="7_trtic"]
 [ext_resource type="PackedScene" uid="uid://bk15rsut7y2x0" path="res://scenes/killzone.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://brdgui2c3etqx" path="res://scenes/enemy_1.tscn" id="8_gee14"]
 [ext_resource type="PackedScene" uid="uid://bijpch5e6jowk" path="res://scenes/chest1.tscn" id="9_0tnpc"]
+[ext_resource type="AudioStream" uid="uid://dq2k6mq2jhnvl" path="res://assets/sounds/coin.wav" id="10_kvuet"]
 [ext_resource type="PackedScene" uid="uid://bkpyeximpnkds" path="res://scenes/door_1.tscn" id="10_vtaks"]
+[ext_resource type="AudioStream" uid="uid://boqwof57dnrv1" path="res://assets/sounds/explosion.wav" id="15_ir15t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dinhu"]
 texture = ExtResource("2_yqjtg")
@@ -3758,6 +3762,13 @@ position = Vector2(512, -113)
 [node name="player" parent="." instance=ExtResource("1_uwrxv")]
 position = Vector2(-409, 178)
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="player"]
+stream = ExtResource("6_ir15t")
+autoplay = true
+
+[node name="SwingSound" type="AudioStreamPlayer2D" parent="player"]
+stream = ExtResource("7_trtic")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-3, -6)
 zoom = Vector2(1.3, 1.3)
@@ -3793,6 +3804,10 @@ position = Vector2(-373, -46)
 [node name="coin2" parent="." instance=ExtResource("5_iywne")]
 position = Vector2(407, 179)
 
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="coin2" groups=["coin", "player"]]
+position = Vector2(0.098480225, -1.3820343)
+stream = ExtResource("10_kvuet")
+
 [node name="TileMap3" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_gee14")
 format = 2
@@ -3807,5 +3822,10 @@ shape = SubResource("WorldBoundaryShape2D_gee14")
 [node name="enemy1" parent="killzone" instance=ExtResource("8_gee14")]
 position = Vector2(144, -186)
 
+[node name="Attack" type="AudioStreamPlayer2D" parent="killzone/enemy1" groups=["player"]]
+stream = ExtResource("15_ir15t")
+
+[connection signal="draw" from="player/SwingSound" to="player" method="_on_swing_sound_draw"]
 [connection signal="body_entered" from="coin" to="player" method="_on_coin_body_entered"]
 [connection signal="body_entered" from="coin2" to="player" method="_on_coin_body_entered"]
+[connection signal="renamed" from="coin2/AudioStreamPlayer2D2" to="coin2" method="_on_audio_stream_player_2d_2_renamed"]
