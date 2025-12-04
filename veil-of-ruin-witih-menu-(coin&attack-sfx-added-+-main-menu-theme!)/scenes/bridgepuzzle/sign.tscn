@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bob5xq88eabe7"]
+
+[ext_resource type="Script" uid="uid://3huo8rmp72ry" path="res://scenes/bridgepuzzle/sign.gd" id="1_kd50q"]
+[ext_resource type="Texture2D" uid="uid://brr37yd5axtel" path="res://assets/Texture/TX Village Props.png" id="1_shbub"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kd50q"]
+size = Vector2(17, 26)
+
+[node name="Sign" type="Area2D"]
+position = Vector2(-5, -7)
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_kd50q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(5.5, 8.5)
+scale = Vector2(0.65625, 0.6304348)
+texture = ExtResource("1_shbub")
+region_enabled = true
+region_rect = Rect2(480, 18, 32, 46)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5.5, 9)
+shape = SubResource("RectangleShape2D_kd50q")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
