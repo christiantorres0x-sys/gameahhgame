@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://cx3takecwqu3w"]
+
+[ext_resource type="Texture2D" uid="uid://clfbeyj1t4k1y" path="res://Liquid Tiles/FlowingLava.png" id="1_dw3wf"]
+[ext_resource type="PackedScene" uid="uid://bk15rsut7y2x0" path="res://scenes/killzone.tscn" id="2_snnrc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4gt0"]
+atlas = ExtResource("1_dw3wf")
+region = Rect2(0, 0, 120, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kmooo"]
+atlas = ExtResource("1_dw3wf")
+region = Rect2(0, 72, 120, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glh1a"]
+atlas = ExtResource("1_dw3wf")
+region = Rect2(0, 144, 120, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dr8oi"]
+atlas = ExtResource("1_dw3wf")
+region = Rect2(0, 216, 120, 72)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dw3wf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b4gt0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kmooo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glh1a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dr8oi")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_snnrc"]
+size = Vector2(122, 65)
+
+[node name="Lava" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(3, 0)
+sprite_frames = SubResource("SpriteFrames_dw3wf")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="killzone" parent="." instance=ExtResource("2_snnrc")]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
+position = Vector2(3, 3.5)
+shape = SubResource("RectangleShape2D_snnrc")
