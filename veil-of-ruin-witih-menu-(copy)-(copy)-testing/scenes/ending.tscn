@@ -1,8 +1,50 @@
-[gd_scene load_steps=23 format=3 uid="uid://b4h05fohl0j7t"]
+[gd_scene load_steps=35 format=3 uid="uid://b4h05fohl0j7t"]
 
+[ext_resource type="Texture2D" uid="uid://kjox7s0bgbot" path="res://assets/Texture/ED Skies 1.png" id="1_5amew"]
 [ext_resource type="Texture2D" uid="uid://cqm64fd2gdf0b" path="res://newassests/Layer_0007_Lights.png" id="1_fyrdv"]
+[ext_resource type="Script" uid="uid://bjocyljb4pe0l" path="res://scenes/ending.gd" id="1_t1k4y"]
 [ext_resource type="Texture2D" uid="uid://vh7qkfjfcycy" path="res://assets/Sprites/RUN.png" id="2_2x1jc"]
 [ext_resource type="Texture2D" uid="uid://brr37yd5axtel" path="res://assets/Texture/TX Village Props.png" id="3_2x1jc"]
+[ext_resource type="Script" uid="uid://c2mk7yfjhxnik" path="res://scenes/ClearSkeis.gd" id="3_75aq2"]
+[ext_resource type="Script" uid="uid://cb5oc4nb3rglr" path="res://scenes/label.gd" id="4_nfmnx"]
+[ext_resource type="AudioStream" uid="uid://btqolwspbahmb" path="res://assets/music/Veil Of Ruin - Ending.mp3" id="5_qa3ag"]
+[ext_resource type="FontFile" uid="uid://ba0p0alun08jg" path="res://assets/Texture/PixelatedEleganceRegular-ovyAA.ttf" id="5_t1k4y"]
+
+[sub_resource type="Animation" id="Animation_o5uye"]
+resource_name = "ScrollRight"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(891.12195, 137), Vector2(276, 137)]
+}
+
+[sub_resource type="Animation" id="Animation_e6d8c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(891.12195, 137)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jc8es"]
+_data = {
+&"RESET": SubResource("Animation_e6d8c"),
+&"ScrollRight": SubResource("Animation_o5uye")
+}
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nfmnx"]
 atlas = ExtResource("2_2x1jc")
@@ -1438,7 +1480,44 @@ texture = ExtResource("3_2x1jc")
 [sub_resource type="TileSet" id="TileSet_qa3ag"]
 sources/0 = SubResource("TileSetAtlasSource_nfmnx")
 
+[sub_resource type="Animation" id="Animation_nfmnx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.56666666, 0.0009999999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(281, -900), Vector2(281, -900)]
+}
+
+[sub_resource type="Animation" id="Animation_2x1jc"]
+resource_name = "scroll"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(280, 657), Vector2(280, -779)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qa3ag"]
+_data = {
+&"RESET": SubResource("Animation_nfmnx"),
+&"scroll": SubResource("Animation_2x1jc")
+}
+
 [node name="ending" type="Node2D"]
+script = ExtResource("1_t1k4y")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -8.0
@@ -1446,6 +1525,18 @@ offset_top = 1.0
 offset_right = 1154.0
 offset_bottom = 652.0
 color = Color(0.0056611504, 0.0056611514, 0.00566115, 1)
+
+[node name="EdSkies1" type="Sprite2D" parent="."]
+position = Vector2(891.12195, 137)
+scale = Vector2(1.3134146, 1.328125)
+texture = ExtResource("1_5amew")
+script = ExtResource("3_75aq2")
+
+[node name="Right" type="AnimationPlayer" parent="EdSkies1"]
+libraries = {
+&"": SubResource("AnimationLibrary_jc8es")
+}
+speed_scale = 0.04
 
 [node name="Layer0007Lights" type="Sprite2D" parent="."]
 position = Vector2(497, -134)
@@ -1463,3 +1554,52 @@ frame_progress = 0.17521232
 tile_set = SubResource("TileSet_qa3ag")
 format = 2
 layer_0/tile_data = PackedInt32Array(2555904, 3407872, 45, 2555905, 3473408, 45, 2555906, 3538944, 45, 2555907, 3604480, 45, 2555908, 3407872, 45, 2555909, 3473408, 45, 2555910, 3538944, 45, 2555911, 3604480, 45, 2555912, 3407872, 45, 2555913, 3473408, 45, 2555914, 3538944, 45, 2555915, 3604480, 45, 2555916, 3407872, 45, 2555917, 3473408, 45, 2555918, 3538944, 45, 2555919, 3604480, 45, 2555920, 3407872, 45, 2555921, 3473408, 45, 2555922, 3538944, 45, 2555923, 3604480, 45, 2555924, 3407872, 45, 2555925, 3473408, 45, 2555926, 3538944, 45, 2555927, 3604480, 45, 2555928, 3407872, 45, 2555929, 3473408, 45, 2555930, 3538944, 45, 2555931, 3604480, 45, 2555932, 3407872, 45, 2555933, 3473408, 45, 2555934, 3538944, 45, 2555935, 3604480, 45, 2555936, 3407872, 45, 2555937, 3473408, 45, 2555938, 3538944, 45, 2555939, 3604480, 45, 2555940, 3407872, 45, 2555941, 3473408, 45, 2555942, 3538944, 45, 2555943, 3604480, 45, 2555944, 3407872, 45, 2555945, 3473408, 45, 2555946, 3538944, 45, 2555947, 3604480, 45, 2555948, 3407872, 45, 2555949, 3473408, 45, 2555950, 3538944, 45, 2555951, 3604480, 45, 2555952, 3407872, 45, 2555953, 3473408, 45, 2555954, 3538944, 45, 2555955, 3604480, 45, 2555956, 3407872, 45, 2555957, 3473408, 45, 2555958, 3538944, 45, 2555959, 3604480, 45, 2555960, 3407872, 45, 2555961, 3473408, 45, 2555962, 3538944, 45, 2555963, 3604480, 45, 2555964, 3407872, 45, 2555965, 3473408, 45, 2555966, 3538944, 45, 2555967, 3604480, 45, 2555968, 3407872, 45, 2555969, 3473408, 45, 2555970, 3538944, 45, 2555971, 3604480, 45, 2555972, 3407872, 45, 2555973, 3473408, 45, 2555974, 3538944, 45, 2555975, 3604480, 45)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 281.0
+offset_top = -900.0
+offset_right = 866.0
+offset_bottom = 441.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_t1k4y")
+theme_override_font_sizes/font_size = 32
+text = "Thank You For Playing!
+
+
+Credits
+
+Music/SFX:
+Anthony Gabriel L. Vitug
+
+Maps:
+Christian Torres
+Kristian Aizon
+
+Programmers:
+Christian Torres
+Kristian Aizon
+Andre Joshua Nobleza
+Anthony Gabriel L. Vitug
+
+
+
+
+
+
+
+
+
+
+"
+horizontal_alignment = 1
+script = ExtResource("4_nfmnx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Label"]
+libraries = {
+&"": SubResource("AnimationLibrary_qa3ag")
+}
+speed_scale = 0.04
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_qa3ag")
+autoplay = true

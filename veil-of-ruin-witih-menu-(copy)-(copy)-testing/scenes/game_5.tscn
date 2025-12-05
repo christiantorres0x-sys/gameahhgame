@@ -4179,7 +4179,7 @@ position = Vector2(-11, 279)
 position = Vector2(129, 278)
 
 [node name="enemy3" parent="killzone" instance=ExtResource("10_coe8y")]
-position = Vector2(298, 279)
+position = Vector2(294, 399)
 
 [node name="enemy4" parent="killzone" instance=ExtResource("10_coe8y")]
 position = Vector2(-29, -236)
@@ -4195,7 +4195,7 @@ position = Vector2(201, 276)
 collision_layer = 8
 
 [node name="player" parent="." instance=ExtResource("11_t6qp4")]
-position = Vector2(440, 270)
+position = Vector2(-244, -246)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="player"]
 stream = ExtResource("12_5r8s5")

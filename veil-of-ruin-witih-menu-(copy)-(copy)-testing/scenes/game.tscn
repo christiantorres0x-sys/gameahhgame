@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dvho52ruuwdd4"]
+[gd_scene load_steps=37 format=3 uid="uid://dvho52ruuwdd4"]
 
 [ext_resource type="PackedScene" uid="uid://u60lgh6hmv3a" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://bt31qy4f1ig5i" path="res://assets/Sprites/world_tileset.png" id="2_yqjtg"]
@@ -1459,6 +1459,9 @@ texture = ExtResource("3_lnu2h")
 [sub_resource type="TileSet" id="TileSet_u5sy4"]
 sources/1 = SubResource("TileSetAtlasSource_kvuet")
 sources/0 = SubResource("TileSetAtlasSource_dinhu")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trtic"]
+size = Vector2(45, 20)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_trtic"]
 texture = ExtResource("2_yqjtg")
@@ -3765,6 +3768,13 @@ autoplay = true
 [node name="SwingSound" type="AudioStreamPlayer2D" parent="player"]
 stream = ExtResource("7_trtic")
 
+[node name="AttackArea" type="Area2D" parent="player"]
+position = Vector2(18, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player/AttackArea"]
+position = Vector2(19.5, 1)
+shape = SubResource("RectangleShape2D_trtic")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-3, -6)
 zoom = Vector2(1.3, 1.3)
@@ -3820,8 +3830,11 @@ position = Vector2(144, -186)
 
 [node name="Attack" type="AudioStreamPlayer2D" parent="killzone/enemy1" groups=["player"]]
 stream = ExtResource("15_ir15t")
+volume_db = 12.0
 
 [connection signal="draw" from="player/SwingSound" to="player" method="_on_swing_sound_draw"]
+[connection signal="body_entered" from="player/AttackArea" to="door1" method="_on_attack_area_body_entered"]
+[connection signal="body_entered" from="player/AttackArea" to="killzone/enemy1" method="_on_attack_area_body_entered"]
 [connection signal="body_entered" from="coin" to="player" method="_on_coin_body_entered"]
 [connection signal="body_entered" from="coin2" to="player" method="_on_coin_body_entered"]
 [connection signal="renamed" from="coin2/AudioStreamPlayer2D2" to="coin2" method="_on_audio_stream_player_2d_2_renamed"]

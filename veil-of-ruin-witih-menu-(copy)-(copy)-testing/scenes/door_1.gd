@@ -47,3 +47,7 @@ func _on_body_entered(body):
 func _on_body_exited(body):
 	if body.name == "player" or body is CharacterBody2D:
 		player_in_range = false
+
+
+func _on_attack_area_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.
