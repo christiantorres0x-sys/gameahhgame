@@ -3758,6 +3758,15 @@ layer_0/tile_data = PackedInt32Array(458725, 3080193, 39, 524261, 3080193, 40, 5
 [node name="door1" parent="." instance=ExtResource("10_vtaks")]
 position = Vector2(512, -113)
 
+[node name="Label" type="Label" parent="."]
+offset_left = -417.0
+offset_top = 118.0
+offset_right = -313.0
+offset_bottom = 204.0
+text = "Controls:
+E - Interact
+X - Attack"
+
 [node name="player" parent="." instance=ExtResource("1_uwrxv")]
 position = Vector2(-409, 178)
 
