@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=3 uid="uid://b8r2p2xkexron"]
+
+[ext_resource type="Script" uid="uid://hq8uvt01a82e" path="res://scenes/controlspanel.gd" id="1_437ix"]
+[ext_resource type="Texture2D" uid="uid://dh77ubp8rtshy" path="res://assets/Texture/yellowforest.png" id="1_nkout"]
+[ext_resource type="Texture2D" uid="uid://hqsmjbfrkrre" path="res://assets/Texture/yelloww.png" id="1_y1y1f"]
+[ext_resource type="FontFile" uid="uid://ba0p0alun08jg" path="res://assets/Texture/PixelatedEleganceRegular-ovyAA.ttf" id="2_nkout"]
+[ext_resource type="AudioStream" uid="uid://crbvbanyfda4i" path="res://assets/music/Veil Of Ruin - Quest for the Crystal Key.mp3" id="5_uglts"]
+[ext_resource type="Texture2D" uid="uid://dpyh01g86qvnu" path="res://assets/font2/Exit Button.png" id="7_4chbx"]
+
+[node name="Controls" type="Node2D"]
+script = ExtResource("1_437ix")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -8.0
+offset_top = 1.0
+offset_right = 1154.0
+offset_bottom = 652.0
+color = Color(0.45490196, 0.74509805, 0.77254903, 1)
+
+[node name="Yellowforest" type="Sprite2D" parent="."]
+position = Vector2(603, 374.99994)
+scale = Vector2(3.8650002, 3.865)
+texture = ExtResource("1_nkout")
+
+[node name="Yelloww" type="Sprite2D" parent="."]
+position = Vector2(588, 300)
+scale = Vector2(0.5512695, 0.55126953)
+texture = ExtResource("1_y1y1f")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 245.0
+offset_top = 150.0
+offset_right = 911.0
+offset_bottom = 403.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_nkout")
+theme_override_font_sizes/font_size = 24
+text = "E - Interact
+
+X - Attack to have immunity
+
+
+
+W A S D = Up, Down, Left , RIght
+
+
+
+Space = Jump"
+horizontal_alignment = 1
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_uglts")
+autoplay = true
+
+[node name="Button4" type="TextureButton" parent="."]
+anchors_preset = -1
+anchor_left = -0.44500002
+anchor_top = 1.1040001
+anchor_right = -0.44500002
+anchor_bottom = 1.1040001
+offset_left = 454.0
+offset_top = 367.00003
+offset_right = 1054.0
+offset_bottom = 567.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.388304, 0.30270436)
+texture_normal = ExtResource("7_4chbx")
+
+[connection signal="pressed" from="Button4" to="." method="_on_button_4_pressed"]
